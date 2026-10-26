@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelSafe Cloud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <h2>✈ TravelSafe Cloud</h2>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#features">Features</a>
+            <a href="/">Dashboard</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Explore the World with Confidence</h1>
+            <p>Smart travel management with secure cloud document storage and backup.</p>
+            <a class="primary-button" href="#destinations">Explore Destinations</a>
+        </div>
+    </section>
+    
+<!-- Travel Search -->
+<section class="search-section">
+    <div class="search-panel">
+        <div class="search-heading">
+            <span class="eyebrow">YOUR NEXT ADVENTURE</span>
+            <h2>Where would you like to go?</h2>
+            <p>Find your perfect destination.</p>
+        </div>
+
+        <form id="travel-search" class="search-form">
+            <div class="search-field">
+                <label for="destination">Destination</label>
+                <select id="destination" required>
+                    <option value="">Choose destination</option>
+                    <option value="switzerland">Switzerland</option>
+                    <option value="maldives">Maldives</option>
+                    <option value="japan">Japan</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <label for="travel-date">Travel Date</label>
+                <input type="date" id="travel-date" required>
+            </div>
+
+            <div class="search-field">
+                <label for="travelers">Travelers</label>
+                <select id="travelers">
+                    <option value="1">1 Traveler</option>
+                    <option value="2">2 Travelers</option>
+                    <option value="3">3 Travelers</option>
+                    <option value="4">4 Travelers</option>
+                </select>
+            </div>
+
+            <button type="submit" class="search-button">
+                Explore Trips →
+            </button>
+        </form>
+        <p id="search-message" class="search-message"
+           role="status" aria-live="polite"></p>
+    </div>
+</section>
+
+
+    <section class="section" id="destinations">
+        <h2>Discover Amazing Destinations</h2>
+        <p>Plan your next unforgettable journey.</p>
+
+        <div class="destination-grid">
+            <article class="destination-card">
+                <img class="destination-photo"
+                src="{{ url_for('static', filename='images/switzerland.jpg') }}"
+                alt="Scenic mountains in Switzerland">
+                <h3>Switzerland</h3>
+                <p>Experience breathtaking Alpine landscapes.</p>
+            </article>
+
+            <article class="destination-card">
+                <img class="destination-photo"
+                src="{{ url_for('static', filename='images/maldives.jpg') }}"
+                alt="Tropical beach in the Maldives">
+                <h3>Maldives</h3>
+                <p>Relax beside crystal-clear tropical waters.</p>
+            </article>
+
+            <article class="destination-card">
+                <img class="destination-photo"
+                 src="{{ url_for('static', filename='images/japan.jpg') }}"
+                 alt="Cherry blossoms and mountains in Japan">
+                <h3>Japan</h3>
+                <p>Explore beautiful culture and cherry blossoms.</p>
+            </article>
+        </div>
+    </section>
+
+
+<!-- Featured Packages -->
+<section class="section packages-section" id="packages">
+    <span class="eyebrow">HANDPICKED EXPERIENCES</span>
+    <h2>Featured Travel Packages</h2>
+    <p>Discover unforgettable journeys around the world.</p>
+
+    <div class="package-grid">
+
+        <article class="package-card">
+            <div class="package-image">
+                <img src="{{ url_for('static', filename='images/switzerland.jpg') }}"
+                     alt="Switzerland Alps">
+                <span class="package-tag">Most Popular</span>
+            </div>
+            <div class="package-content">
+                <span class="package-location">SWITZERLAND</span>
+                <h3>Swiss Alpine Escape</h3>
+                <p>Explore breathtaking mountains, lakes, and charming villages.</p>
+                <div class="package-meta">
+                    <span>6 Days / 5 Nights</span>
+                    <span>Nature & Adventure</span>
+                </div>
+                <div class="package-footer">
+                    <div>
+                        <small>Starting from</small>
+                        <strong>₹89,999</strong>
+                    </div>
+                    <a href="#travel-search">Explore →</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="package-card">
+            <div class="package-image">
+                <img src="{{ url_for('static', filename='images/maldives.jpg') }}"
+                     alt="Maldives beach">
+                <span class="package-tag">Luxury</span>
+            </div>
+            <div class="package-content">
+                <span class="package-location">MALDIVES</span>
+                <h3>Tropical Paradise</h3>
+                <p>Relax beside turquoise waters and beautiful island resorts.</p>
+                <div class="package-meta">
+                    <span>5 Days / 4 Nights</span>
+                    <span>Beach & Relaxation</span>
+                </div>
+                <div class="package-footer">
+                    <div>
+                        <small>Starting from</small>
+                        <strong>₹74,999</strong>
+                    </div>
+                    <a href="#travel-search">Explore →</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="package-card">
+            <div class="package-image">
+                <img src="{{ url_for('static', filename='images/japan.jpg') }}"
+                     alt="Japan cherry blossoms">
+                <span class="package-tag">Cultural</span>
+            </div>
+            <div class="package-content">
+                <span class="package-location">JAPAN</span>
+                <h3>Discover Japan</h3>
+                <p>Experience iconic landscapes, culture, and historic cities.</p>
+                <div class="package-meta">
+                    <span>7 Days / 6 Nights</span>
+                    <span>Culture & Discovery</span>
+                </div>
+                <div class="package-footer">
+                    <div>
+                        <small>Starting from</small>
+                        <strong>₹99,999</strong>
+                    </div>
+                    <a href="#travel-search">Explore →</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+    <p class="demo-note">Sample packages and illustrative prices for an academic project.</p>
+</section>
+
+    <section class="section features" id="features">
+        <h2>Why TravelSafe Cloud?</h2>
+        <div class="destination-grid">
+            <article class="feature-card">
+                <h3>☁ Secure Cloud Storage</h3>
+                <p>Organize travel documents in private cloud storage.</p>
+            </article>
+            <article class="feature-card">
+                <h3>🗂 Booking Management</h3>
+                <p>Manage customers, travel packages and bookings.</p>
+            </article>
+            <article class="feature-card">
+                <h3>🔄 Backup and Recovery</h3>
+                <p>Verify backup copies and restore documents when needed.</p>
+            </article>
+        </div>
+    </section>
+
+    <footer>© 2026 TravelSafe Cloud. Academic Mini Project.</footer>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+</body>
+</html>

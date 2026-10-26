@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TravelSafe Cloud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h1>TravelSafe Cloud</h1>
+        <span>Travel Agency Document Management</span>
+    </div>
+
+    <div class="container">
+
+        <h2>Dashboard</h2>
+        <p class="subtitle">
+            Manage, store and backup your travel agency documents securely.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Documents</h3>
+                <p>0</p>
+            </div>
+
+            <div class="card">
+                <h3>AWS Backups</h3>
+                <p>0</p>
+            </div>
+
+            <div class="card">
+                <h3>GCP Backups</h3>
+                <p>0</p>
+            </div>
+
+            <div class="card">
+                <h3>Backup Status</h3>
+                <p>Ready</p>
+            </div>
+
+        </div>
+
+        <div class="upload-section">
+
+            <h2>Upload Travel Document</h2>
+
+            
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <label>Document Type</label>
+
+
+                <select name="document_type">
+                    <option>Booking Confirmation</option>
+                    <option>Travel Itinerary</option>
+                    <option>Invoice</option>
+                    <option>Hotel Reservation</option>
+                    <option>Flight Reservation</option>
+                    <option>Customer Document</option>
+                    <option>Other</option>
+                </select>
+
+                <label>Select File</label>
+
+                <input type="file" name="file" required>
+
+                <button type="submit">Upload & Backup</button>
+
+            </form>
+
+        </div>
+
+        <div class="documents">
+
+            <h2>Recent Documents</h2>
+
+            <table>
+
+                <tr>
+                    <th>File Name</th>
+                    <th>Type</th>
+                    <th>AWS S3</th>
+                    <th>Google Cloud</th>
+                    <th>Status</th>
+                </tr>
+            
+                {% if documents %}
+            
+                    {% for document in documents %}
+            
+                    <tr>
+                        <td>{{ document["file_name"] }}</td>
+                        <td>{{ document["document_type"] }}</td>
+                        <td>{{ document["aws_status"] }}</td>
+                        <td>{{ document["gcp_status"] }}</td>
+                        <td>Pending Backup</td>
+                    </tr>
+            
+                    {% endfor %}
+            
+                {% else %}
+            
+                    <tr>
+                        <td colspan="5">No documents uploaded yet</td>
+                    </tr>
+            
+                {% endif %}
+            
+            </table>
+            
+
+        </div>
+
+    </div>
+
+</body>
+</html>

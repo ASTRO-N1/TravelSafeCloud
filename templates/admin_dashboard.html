@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | TravelSafe Cloud</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard-new.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            ✈ TravelSafe<span>Cloud</span>
+        </div>
+
+        <p class="sidebar-label">WORKSPACE</p>
+
+        <nav>
+            <a class="active"
+               href="{{ url_for('admin_dashboard') }}">
+                ▦ Dashboard
+            </a>
+
+            <a href="{{ url_for('customers_page') }}">
+                ♙ Customers
+            </a>
+
+            <a href="{{ url_for('bookings_page') }}">
+                ▤ Bookings
+            </a>
+
+            <a href="#documents">
+                ▣ Documents
+            </a>
+
+            <a href="{{ url_for('cloud_dashboard') }}">
+                ↻ Cloud Backups
+            </a>
+
+            <a href="{{ url_for('travel_home') }}">
+                ⌂ Travel Website
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Travel Agency Management</p>
+            <small>Academic Cloud Project</small>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <p class="welcome-label">
+                    TRAVELSAFE WORKSPACE
+                </p>
+
+                <h1>Dashboard Overview</h1>
+
+                <p>
+                    Manage your travel operations in one place.
+                </p>
+            </div>
+
+            <div class="admin-profile">AD</div>
+
+        </header>
+
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <p>Total Customers</p>
+
+                <h2>
+                    {{ stats.total_customers }}
+                </h2>
+
+                <span>Supabase customer records</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Total Bookings</p>
+
+                <h2>
+                    {{ stats.total_bookings }}
+                </h2>
+
+                <span>Supabase booking records</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Cloud Documents</p>
+
+                <h2>
+                    {{ stats.total_documents }}
+                </h2>
+
+                <span>Supabase document records</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Verified Backups</p>
+
+                <h2>
+                    {{ stats.verified_backups }}
+                </h2>
+
+                <span>SHA-256 verified backups</span>
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT GRID -->
+        <section class="content-grid">
+
+            <!-- RECENT DOCUMENTS -->
+            <div class="panel" id="documents">
+
+                <div class="panel-heading">
+                    <div>
+                        <h2>Recent Documents</h2>
+
+                        <p>
+                            Files recorded in Supabase PostgreSQL
+                        </p>
+                    </div>
+                </div>
+
+                <div class="table-scroll">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>Type</th>
+                                <th>Uploaded</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for document in documents %}
+
+                            <tr>
+                                <td>
+                                    {{ document.get('file_name', '-') }}
+                                </td>
+
+                                <td>
+                                    {{ document.get('document_type', '-') }}
+                                </td>
+
+                                <td>
+                                    {{ document.get('upload_date', '-') }}
+                                </td>
+
+                                <td>
+                                    <span class="status">
+                                        {{ document.get('verification_status', 'Unknown') }}
+                                        /
+                                        {{ document.get('storage_status', 'Unknown') }}
+                                    </span>
+                                </td>
+                            </tr>
+
+                            {% else %}
+
+                            <tr>
+                                <td colspan="4">
+                                    No documents uploaded yet.
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+            <div class="panel quick-actions">
+
+                <h2>Quick Actions</h2>
+
+                <p>Access frequently used features.</p>
+
+                <a href="{{ url_for('cloud_upload_page') }}"
+                   class="action-link">
+                    <span>↑</span> Upload Documents
+                </a>
+
+                <a href="{{ url_for('customers_page') }}"
+                   class="action-link">
+                    <span>♙</span> Manage Customers
+                </a>
+
+                <a href="{{ url_for('bookings_page') }}"
+                   class="action-link">
+                    <span>▤</span> View Bookings
+                </a>
+
+                <a href="{{ url_for('cloud_dashboard') }}"
+                   class="action-link">
+                    <span>↻</span> Cloud Backups
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- CLOUD INFRASTRUCTURE -->
+        <section class="panel cloud-panel" id="backups">
+
+            <h2>Cloud Infrastructure</h2>
+
+            <p>
+                Cloud services used by TravelSafe Cloud.
+            </p>
+
+            <div class="cloud-grid">
+
+                <div>
+                    <strong>Render</strong>
+
+                    <span>
+                        Flask hosting — Not deployed
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Supabase PostgreSQL</strong>
+
+                    <span>
+                        Database — Integrated and tested
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Supabase Storage</strong>
+
+                    <span>
+                        Private storage — Upload tested
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

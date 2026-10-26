@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings | TravelSafe Cloud</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard-new.css') }}">
+    <style>
+        body {
+            background: #f4f7fb;
+            font-family: Arial, sans-serif;
+            color: #172b4d;
+            margin: 0;
+        }
+        .bookings-container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+        .bookings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+        .back-link {
+            background: #173b70;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .table-wrapper {
+            background: white;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,.06);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e8edf4;
+        }
+        th {
+            background: #eaf1fa;
+            color: #173b70;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bookings-container">
+    <div class="bookings-header">
+        <div>
+            <h1>Travel Bookings</h1>
+            <p>Bookings retrieved from Supabase PostgreSQL</p>
+        </div>
+        <a href="{{ url_for('admin_dashboard') }}"
+           class="back-link">Back to Dashboard</a>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer ID</th>
+                    <th>Package ID</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.get('booking_id', '-') }}</td>
+                    <td>{{ booking.get('customer_id', '-') }}</td>
+                    <td>{{ booking.get('package_id', '-') }}</td>
+                    <td>{{ booking.get('booking_status', booking.get('status', '-')) }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="empty-message">
+                        No bookings found in Supabase.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

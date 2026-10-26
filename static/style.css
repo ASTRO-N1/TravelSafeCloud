@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
+.navbar {
+    background: #172554;
+    color: white;
+    padding: 20px 40px;
+}
+
+.navbar h1 {
+    margin: 0;
+}
+
+.navbar span {
+    font-size: 14px;
+}
+
+.container {
+    width: 90%;
+    margin: 30px auto;
+}
+
+.subtitle {
+    color: #666;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    flex: 1;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.upload-section,
+.documents {
+    background: white;
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #ccc;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select,
+input {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #172554;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}

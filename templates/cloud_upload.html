@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Cloud Upload | TravelSafe Cloud</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 40px 16px;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #00000012;
+        }
+
+        h2 {
+            color: #12365a;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            background: #087f8c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+        #result {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>TravelSafe Cloud</h2>
+        <p>Secure Document Upload & Automatic Backup</p>
+
+        <form id="uploadForm">
+            <label for="booking_id">Select Booking</label>
+
+            <select id="booking_id" name="booking_id" required>
+                <option value="">Choose a booking</option>
+                {% for booking in bookings %}
+                <option value="{{ booking.booking_id }}">
+                    Booking #{{ booking.booking_id }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label for="document_type">Document Type</label>
+
+            <select id="document_type"
+                    name="document_type" required>
+                <option value="Travel Document">Travel Document</option>
+                <option value="Ticket">Ticket</option>
+                <option value="Hotel Confirmation">Hotel Confirmation</option>
+                <option value="Itinerary">Itinerary</option>
+            </select>
+
+            <label for="file">Upload PDF</label>
+            <input type="file"
+                   id="file"
+                   name="file"
+                   accept=".pdf,application/pdf"
+                   required>
+
+            <button id="submitBtn" type="submit">
+                Upload & Create Backup
+            </button>
+        </form>
+
+        <div id="result" role="status"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById("uploadForm");
+        const result = document.getElementById("result");
+        const button = document.getElementById("submitBtn");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            button.disabled = true;
+            result.textContent = "Uploading and verifying backup...";
+
+            try {
+                
+                const response = await fetch("/cloud-upload", {
+                    method: "POST",
+                    headers: {
+                         "X-CSRFToken": "{{ csrf_token() }}"
+                        },
+                    body: new FormData(form)
+                });
+
+const data = await response.json();
+
+
+                result.textContent =
+                    "Cloud upload successful!\n" +
+                    "Document ID: " + data.document_id + "\n" +
+                    "Backup ID: " + data.backup_id + "\n" +
+                    "SHA-256 verified: " + data.verified;
+
+                form.reset();
+
+            } catch (error) {
+                result.textContent = "Error: " + error.message;
+            } finally {
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

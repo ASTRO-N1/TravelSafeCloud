@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers | TravelSafe Cloud</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='dashboard-new.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='customers.css') }}">
+</head>
+<body>
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            ✈ TravelSafe<span>Cloud</span>
+        </div>
+
+        <p class="sidebar-label">WORKSPACE</p>
+
+        <nav>
+            <a href="/admin">▦ Dashboard</a>
+            <a href="/customers" class="active">♙ Customers</a>
+            <a href="#bookings">▤ Bookings</a>
+            <a href="/">▣ Documents</a>
+            <a href="/admin#backups">↻ Cloud Backups</a>
+            <a href="/home">⌂ Travel Website</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Travel Agency Management</p>
+            <small>Academic Cloud Project</small>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="welcome-label">TRAVELSAFE WORKSPACE</p>
+                <h1>Customer Management</h1>
+                <p>Manage your travel agency customers.</p>
+            </div>
+            <div class="admin-profile">AD</div>
+        </header>
+
+        <!-- Customer Statistics -->
+        <section class="customer-stats">
+            <div class="stat-card">
+                <p>Total Customers</p>
+                <h2>0</h2>
+                <span>Registered customers</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Active Bookings</p>
+                <h2>0</h2>
+                <span>Integration pending</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Destinations</p>
+                <h2>3</h2>
+                <span>Featured destinations</span>
+            </div>
+        </section>
+
+        <!-- Customer Table -->
+        <section class="panel customer-panel">
+
+            <div class="customer-header">
+                <div>
+                    <h2>All Customers</h2>
+                    <p>View and organize customer information.</p>
+                </div>
+
+                
+<button class="add-btn" type="button"
+id="add-customer-btn"
+onclick="document.getElementById('customer-form-panel').hidden = false; document.getElementById('customer-form-panel').scrollIntoView({behavior: 'smooth'});">
++ Add Customer
+</button>
+
+            </div>
+
+            <div class="customer-toolbar">
+                <input type="search"
+                       id="customer-search"
+                       placeholder="Search customers..."
+                       aria-label="Search customers">
+            </div>
+
+            <div class="table-scroll">
+                <table id="customer-table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Destination</th>
+                            <th>Travel Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customer-table-body">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                No customers added yet.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- Add Customer Form -->
+        <section class="panel customer-form-panel"
+                 id="customer-form-panel" hidden>
+
+            <h2>Add New Customer</h2>
+            <p>Enter customer details below.</p>
+
+            <form id="customer-form">
+                <div class="form-grid">
+
+                    <div class="form-field">
+                        <label for="full-name">Full Name</label>
+                        <input id="full-name" type="text"
+                               required maxlength="100">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Email Address</label>
+                        <input id="email" type="email"
+                               required maxlength="150">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="phone">Phone Number</label>
+                        <input id="phone" type="tel"
+                               required maxlength="20">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="preferred-destination">
+                            Preferred Destination
+                        </label>
+                        <select id="preferred-destination" required>
+                            <option value="">Select destination</option>
+                            <option>Switzerland</option>
+                            <option>Maldives</option>
+                            <option>Japan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="travel-type">Travel Type</label>
+                        <select id="travel-type" required>
+                            <option value="">Select travel type</option>
+                            <option>Adventure</option>
+                            <option>Luxury</option>
+                            <option>Family</option>
+                            <option>Honeymoon</option>
+                            <option>Cultural</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="add-btn">Save to Cloud </button>
+                    <button type="button" class="cancel-btn"
+                            id="cancel-customer-btn">
+                        Cancel
+                    </button>
+                </div>
+                <p class="form-note">
+                    Preview only. Customer data is not saved yet.
+                </p>
+            </form>
+        </section>
+
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='customers.js') }}"></script>
+</body>
+</html>

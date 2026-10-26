@@ -1,0 +1,9 @@
+
+TravelSafe Cloud - Sample Travel Document
+
+Customer: Demo Customer
+Destination: Switzerland
+Travel Type: Adventure
+
+This is a fictional test document created
+to verify Supabase Cloud Storage integration.

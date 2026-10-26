@@ -278,3 +278,42 @@ def get_bookings():
     response.raise_for_status()
     return response.json()
 
+
+def get_travel_packages():
+    """Retrieve travel packages from Supabase PostgreSQL."""
+
+    response = requests.get(
+        BASE_URL + "/travel_packages",
+        headers=HEADERS,
+        params={
+            "select": "*",
+            "order": "package_id.asc"
+        },
+        timeout=15
+    )
+
+    response.raise_for_status()
+    return response.json()
+
+
+def add_booking(booking_data):
+    """Save a new booking to Supabase PostgreSQL."""
+
+    headers = HEADERS.copy()
+    headers["Prefer"] = "return=representation"
+
+    response = requests.post(
+        BASE_URL + "/bookings",
+        headers=headers,
+        json=booking_data,
+        timeout=15
+    )
+
+    if not response.ok:
+        raise RuntimeError(
+            "Supabase booking insert failed. "
+            f"HTTP {response.status_code}: {response.text}"
+        )
+
+    return response.json()
+

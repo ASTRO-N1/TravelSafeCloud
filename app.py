@@ -29,6 +29,8 @@ from supabase_client import (
     get_customers,
     add_customer,
     get_bookings,
+    add_booking,
+    get_travel_packages,
     add_document,
     add_backup_record,
     get_backup_records,
@@ -380,14 +382,85 @@ def customers_api():
 # BOOKINGS PAGE
 # ========================================
 
-@app.route("/bookings", methods=["GET"])
+@app.route("/bookings", methods=["GET", "POST"])
 def bookings_page():
 
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
 
+    if request.method == "POST":
+        is_json = request.is_json
+        data = request.get_json(silent=True) if is_json else request.form
+
+        try:
+            customer_id = int(data.get("customer_id", 0))
+            package_id = int(data.get("package_id", 0))
+            travel_start_date = (data.get("travel_start_date") or "").strip()
+            travel_end_date = (data.get("travel_end_date") or "").strip()
+            number_of_travelers = int(data.get("number_of_travelers", 1))
+            total_amount = float(data.get("total_amount", 0))
+            special_requests = (data.get("special_requests") or "").strip() or None
+            booking_status = (data.get("booking_status") or "Confirmed").strip()
+
+            if not customer_id or not package_id or not travel_start_date or not travel_end_date:
+                error_msg = "Customer, package, start date, and end date are required."
+                if is_json:
+                    return jsonify({"success": False, "error": error_msg}), 400
+                return render_template(
+                    "bookings.html",
+                    error=error_msg,
+                    bookings=get_bookings(),
+                    customers=get_customers(),
+                    packages=get_travel_packages()
+                ), 400
+
+            booking_payload = {
+                "customer_id": customer_id,
+                "package_id": package_id,
+                "travel_start_date": travel_start_date,
+                "travel_end_date": travel_end_date,
+                "number_of_travelers": number_of_travelers,
+                "total_amount": total_amount,
+                "booking_status": booking_status,
+                "payment_status": "Pending",
+                "approval_status": "Approved" if booking_status == "Confirmed" else "Pending",
+                "special_requests": special_requests
+            }
+
+            saved_rows = add_booking(booking_payload)
+            saved_booking = saved_rows[0] if saved_rows else booking_payload
+
+            if is_json:
+                return jsonify({
+                    "success": True,
+                    "message": "Booking created successfully in Supabase",
+                    "booking": saved_booking
+                }), 201
+
+            return redirect(url_for("bookings_page"))
+
+        except Exception as ex:
+            app.logger.exception("Failed to create booking in Supabase")
+            if is_json:
+                return jsonify({"success": False, "error": str(ex)}), 500
+            try:
+                bookings = get_bookings()
+                customers = get_customers()
+                packages = get_travel_packages()
+            except Exception:
+                bookings, customers, packages = [], [], []
+            return render_template(
+                "bookings.html",
+                error="Failed to create booking: " + str(ex),
+                bookings=bookings,
+                customers=customers,
+                packages=packages
+            ), 500
+
     try:
         bookings = get_bookings()
+        customers = get_customers()
+        packages = get_travel_packages()
 
     except Exception:
         app.logger.exception(
@@ -401,7 +474,9 @@ def bookings_page():
 
     return render_template(
         "bookings.html",
-        bookings=bookings
+        bookings=bookings,
+        customers=customers,
+        packages=packages
     )
 
 

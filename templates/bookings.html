@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +12,12 @@
             font-family: Arial, sans-serif;
             color: #172b4d;
             margin: 0;
+            padding-bottom: 50px;
         }
         .bookings-container {
-            max-width: 1150px;
-            margin: 45px auto;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
         }
         .bookings-header {
             display: flex;
@@ -25,36 +25,238 @@
             align-items: center;
             gap: 16px;
             margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .bookings-header h1 {
+            margin: 0 0 6px 0;
+            font-size: 28px;
+            color: #173b70;
+        }
+        .bookings-header p {
+            margin: 0;
+            color: #5e6c84;
+            font-size: 14px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .primary-btn {
+            background: #008fbd;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+        .primary-btn:hover {
+            background: #007094;
         }
         .back-link {
             background: #173b70;
             color: white;
-            padding: 12px 18px;
+            padding: 11px 18px;
             border-radius: 8px;
             text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s;
         }
-        .table-wrapper {
+        .back-link:hover {
+            background: #0f2648;
+        }
+        .alert {
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .alert-error {
+            background: #ffebe6;
+            color: #bf2600;
+            border: 1px solid #ffbdad;
+        }
+        .alert-success {
+            background: #e3fcef;
+            color: #006644;
+            border: 1px solid #abf5d1;
+        }
+
+        /* Booking Form Card */
+        .form-card {
             background: white;
             border-radius: 12px;
+            padding: 26px 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+            border-top: 4px solid #008fbd;
+            animation: slideDown 0.25s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-card h2 {
+            margin: 0 0 4px 0;
+            font-size: 20px;
+            color: #173b70;
+        }
+        .form-card .form-subtitle {
+            margin: 0 0 20px 0;
+            color: #6b778c;
+            font-size: 13px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-field.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-field label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #344563;
+        }
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            padding: 10px 13px;
+            border: 1px solid #dfe1e6;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #172b4d;
+            background: #fafbfc;
+            transition: all 0.2s;
+        }
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #008fbd;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,143,189,0.15);
+        }
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .secondary-btn {
+            background: #ebecf0;
+            color: #42526e;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .secondary-btn:hover {
+            background: #dfe1e6;
+        }
+
+        /* Table Card */
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .table-toolbar {
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ebecf0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .table-toolbar h3 {
+            margin: 0;
+            font-size: 17px;
+            color: #173b70;
+        }
+        .table-search {
+            padding: 8px 14px;
+            border: 1px solid #dfe1e6;
+            border-radius: 6px;
+            font-size: 13px;
+            width: 240px;
+        }
+        .table-wrapper {
             overflow-x: auto;
-            box-shadow: 0 4px 20px rgba(0,0,0,.06);
         }
         table {
             width: 100%;
             border-collapse: collapse;
         }
         th, td {
-            padding: 15px;
+            padding: 14px 18px;
             text-align: left;
-            border-bottom: 1px solid #e8edf4;
+            border-bottom: 1px solid #ebecf0;
+            font-size: 14px;
         }
         th {
             background: #eaf1fa;
             color: #173b70;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+        tr:hover td {
+            background: #fafbfc;
         }
         .empty-message {
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
+            color: #6b778c;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        .badge-confirmed {
+            background: #e3fcef;
+            color: #006644;
+        }
+        .badge-pending {
+            background: #fffae6;
+            color: #974f0c;
+        }
+        .badge-cancelled {
+            background: #ffebe6;
+            color: #bf2600;
+        }
+        .booking-id-tag {
+            font-weight: 700;
+            color: #173b70;
+        }
+        .amount-tag {
+            font-weight: 600;
+            color: #091e42;
         }
     </style>
 </head>
@@ -64,41 +266,226 @@
     <div class="bookings-header">
         <div>
             <h1>Travel Bookings</h1>
-            <p>Bookings retrieved from Supabase PostgreSQL</p>
+            <p>Manage and create bookings backed by Supabase PostgreSQL</p>
         </div>
-        <a href="{{ url_for('admin_dashboard') }}"
-           class="back-link">Back to Dashboard</a>
+        <div class="header-actions">
+            <button type="button" class="primary-btn" id="toggle-form-btn" onclick="toggleBookingForm()">
+                + New Booking
+            </button>
+            <a href="{{ url_for('admin_dashboard') }}" class="back-link">
+                Back to Dashboard
+            </a>
+        </div>
     </div>
 
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Customer ID</th>
-                    <th>Package ID</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for booking in bookings %}
-                <tr>
-                    <td>{{ booking.get('booking_id', '-') }}</td>
-                    <td>{{ booking.get('customer_id', '-') }}</td>
-                    <td>{{ booking.get('package_id', '-') }}</td>
-                    <td>{{ booking.get('booking_status', booking.get('status', '-')) }}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="4" class="empty-message">
-                        No bookings found in Supabase.
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    {% if error %}
+    <div class="alert alert-error">
+        ⚠️ {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- New Booking Form Card -->
+    <div class="form-card" id="booking-form-card" style="display: none;">
+        <h2>Create New Booking</h2>
+        <p class="form-subtitle">Fill in the trip and customer details to record a booking in Supabase</p>
+
+        <form method="POST" action="{{ url_for('bookings_page') }}" id="booking-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="form-grid">
+                <!-- Customer Selection -->
+                <div class="form-field">
+                    <label for="customer_id">Customer *</label>
+                    <select name="customer_id" id="customer_id" required>
+                        <option value="">Select Customer...</option>
+                        {% for customer in customers %}
+                        <option value="{{ customer.get('customer_id') }}">
+                            {{ customer.get('full_name') }} (ID: {{ customer.get('customer_id') }}) - {{ customer.get('email') }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Package Selection -->
+                <div class="form-field">
+                    <label for="package_id">Travel Package *</label>
+                    <select name="package_id" id="package_id" required onchange="calculateTotal()">
+                        <option value="" data-price="0">Select Package...</option>
+                        {% for pkg in packages %}
+                        <option value="{{ pkg.get('package_id') }}" data-price="{{ pkg.get('price', 0) }}">
+                            {{ pkg.get('package_name') }} - ₹{{ "{:,.0f}".format(pkg.get('price', 0)) }} ({{ pkg.get('destination') }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Travel Dates -->
+                <div class="form-field">
+                    <label for="travel_start_date">Travel Start Date *</label>
+                    <input type="date" name="travel_start_date" id="travel_start_date" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="travel_end_date">Travel End Date *</label>
+                    <input type="date" name="travel_end_date" id="travel_end_date" required>
+                </div>
+
+                <!-- Travelers -->
+                <div class="form-field">
+                    <label for="number_of_travelers">Number of Travelers *</label>
+                    <input type="number" name="number_of_travelers" id="number_of_travelers" min="1" max="50" value="1" required oninput="calculateTotal()">
+                </div>
+
+                <!-- Total Amount -->
+                <div class="form-field">
+                    <label for="total_amount">Total Amount (₹) *</label>
+                    <input type="number" step="0.01" name="total_amount" id="total_amount" placeholder="0.00" required>
+                </div>
+
+                <!-- Status -->
+                <div class="form-field">
+                    <label for="booking_status">Booking Status</label>
+                    <select name="booking_status" id="booking_status">
+                        <option value="Confirmed" selected>Confirmed</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+
+                <!-- Special Requests -->
+                <div class="form-field full-width">
+                    <label for="special_requests">Special Requests / Notes</label>
+                    <textarea name="special_requests" id="special_requests" rows="2" placeholder="Dietary restrictions, flight details, or specific tour requests..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="primary-btn">Save Booking to Supabase</button>
+                <button type="button" class="secondary-btn" onclick="toggleBookingForm(false)">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bookings Table Card -->
+    <div class="table-card">
+        <div class="table-toolbar">
+            <h3>Registered Bookings ({{ bookings|length }})</h3>
+            <input type="text" id="table-search" class="table-search" placeholder="Search bookings..." oninput="filterBookings()">
+        </div>
+
+        <div class="table-wrapper">
+            <table id="bookings-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Customer ID</th>
+                        <th>Package ID</th>
+                        <th>Travel Dates</th>
+                        <th>Travelers</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td class="booking-id-tag">#{{ booking.get('booking_id', '-') }}</td>
+                        <td>
+                            {% set cid = booking.get('customer_id') %}
+                            Customer #{{ cid }}
+                        </td>
+                        <td>
+                            {% set pid = booking.get('package_id') %}
+                            Package #{{ pid }}
+                        </td>
+                        <td>
+                            {% if booking.get('travel_start_date') and booking.get('travel_end_date') %}
+                                {{ booking.get('travel_start_date') }} to {{ booking.get('travel_end_date') }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>{{ booking.get('number_of_travelers', 1) }}</td>
+                        <td class="amount-tag">
+                            {% if booking.get('total_amount') is not none %}
+                                ₹{{ "{:,.2f}".format(booking.get('total_amount')|float) }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% set status = (booking.get('booking_status') or booking.get('status') or 'Pending')|lower %}
+                            <span class="badge {% if status == 'confirmed' %}badge-confirmed{% elif status == 'cancelled' %}badge-cancelled{% else %}badge-pending{% endif %}">
+                                {{ booking.get('booking_status', booking.get('status', 'Pending')) }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="empty-message">
+                            No bookings found in Supabase. Click "+ New Booking" above to add your first booking!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+<script>
+    function toggleBookingForm(forceState) {
+        const card = document.getElementById('booking-form-card');
+        const btn = document.getElementById('toggle-form-btn');
+        const isHidden = card.style.display === 'none';
+        const show = forceState !== undefined ? forceState : isHidden;
+
+        card.style.display = show ? 'block' : 'none';
+        btn.textContent = show ? '✕ Close Form' : '+ New Booking';
+        if (show) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function calculateTotal() {
+        const pkgSelect = document.getElementById('package_id');
+        const travelersInput = document.getElementById('number_of_travelers');
+        const totalInput = document.getElementById('total_amount');
+
+        const selectedOption = pkgSelect.options[pkgSelect.selectedIndex];
+        const price = parseFloat(selectedOption?.getAttribute('data-price')) || 0;
+        const travelers = parseInt(travelersInput.value, 10) || 1;
+
+        if (price > 0) {
+            totalInput.value = (price * travelers).toFixed(2);
+        }
+    }
+
+    // Set default travel dates (tomorrow to 7 days later)
+    window.addEventListener('DOMContentLoaded', () => {
+        const startInput = document.getElementById('travel_start_date');
+        const endInput = document.getElementById('travel_end_date');
+
+        if (startInput && !startInput.value) {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            startInput.value = tomorrow.toISOString().split('T')[0];
+
+            const weekLater = new Date();
+            weekLater.setDate(weekLater.getDate() + 8);
+            endInput.value = weekLater.toISOString().split('T')[0];
+        }
+    });
+
+    function filterBookings() {
+        const query = document.getElementById('table-search').value.toLowerCase();
+        const rows = document.querySelectorAll('#bookings-table tbody tr');
+
+        rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+        });
+    }
+</script>
 
 </body>
 </html>

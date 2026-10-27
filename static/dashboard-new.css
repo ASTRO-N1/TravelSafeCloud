@@ -184,22 +184,174 @@ table {
 }
 
 th, td {
-    padding: 15px 10px;
+    padding: 14px 12px;
     text-align: left;
     border-bottom: 1px solid #edf1f5;
+    vertical-align: middle;
 }
 
 th {
     color: #8494a4;
     font-weight: 600;
+    white-space: nowrap;
 }
 
+.filename-cell {
+    max-width: 220px;
+}
+
+.file-text {
+    display: inline-block;
+    max-width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.type-cell {
+    white-space: nowrap;
+}
+
+.type-tag {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.date-cell {
+    white-space: nowrap;
+}
+
+.date-box {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.date-main {
+    font-size: 12px;
+    color: #334155;
+    font-weight: 500;
+}
+
+.date-sub {
+    font-size: 10.5px;
+    color: #94a3b8;
+}
+
+/* Status container & badges */
+.status-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: nowrap;
+    text-transform: capitalize;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Verified / Success / Confirmed */
+.status-badge.status-verified,
+.status-badge.status-success,
+.status-badge.status-confirmed,
+.status-badge.status-recovered {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+.status-badge.status-verified .status-dot,
+.status-badge.status-success .status-dot,
+.status-badge.status-confirmed .status-dot,
+.status-badge.status-recovered .status-dot {
+    background: #10b981;
+}
+
+/* Uploaded / Info / Blue */
+.status-badge.status-uploaded,
+.status-badge.status-info,
+.status-badge.status-active {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+.status-badge.status-uploaded .status-dot,
+.status-badge.status-info .status-dot {
+    background: #3b82f6;
+}
+
+/* Pending / Warning */
+.status-badge.status-pending,
+.status-badge.status-waiting {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+.status-badge.status-pending .status-dot {
+    background: #f59e0b;
+}
+
+/* Failed / Danger */
+.status-badge.status-failed,
+.status-badge.status-error,
+.status-badge.status-cancelled {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+.status-badge.status-failed .status-dot {
+    background: #ef4444;
+}
+
+/* Default / Unknown */
+.status-badge.status-unknown,
+.status-badge.status-default {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+.status-badge.status-unknown .status-dot {
+    background: #94a3b8;
+}
+
+/* Backward-compatibility for .status */
 .status {
-    background: #e9f6f5;
-    color: #087f8c;
-    padding: 7px 10px;
+    display: inline-flex;
+    align-items: center;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    padding: 4px 10px;
     border-radius: 20px;
     font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1.3;
 }
 
 .quick-actions {

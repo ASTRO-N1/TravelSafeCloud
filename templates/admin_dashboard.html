@@ -165,24 +165,43 @@
                             {% for document in documents %}
 
                             <tr>
-                                <td>
-                                    {{ document.get('file_name', '-') }}
+                                <td class="filename-cell" title="{{ document.get('file_name', '-') }}">
+                                    <span class="file-text">{{ document.get('file_name', '-') }}</span>
+                                </td>
+
+                                <td class="type-cell">
+                                    <span class="type-tag">{{ document.get('document_type', '-') }}</span>
+                                </td>
+
+                                <td class="date-cell">
+                                    {% set up_date = document.get('upload_date', '-') %}
+                                    {% if up_date and 'T' in up_date %}
+                                        <div class="date-box" title="{{ up_date }}">
+                                            <span class="date-main">{{ up_date.split('T')[0] }}</span>
+                                            <span class="date-sub">{{ up_date.split('T')[1][:5] }}</span>
+                                        </div>
+                                    {% else %}
+                                        {{ up_date }}
+                                    {% endif %}
                                 </td>
 
                                 <td>
-                                    {{ document.get('document_type', '-') }}
-                                </td>
+                                    <div class="status-cell">
+                                        {% set v_status = document.get('verification_status', 'Unknown') %}
+                                        {% set s_status = document.get('storage_status', 'Unknown') %}
 
-                                <td>
-                                    {{ document.get('upload_date', '-') }}
-                                </td>
+                                        <span class="status-badge status-{{ v_status | lower }}" title="Verification: {{ v_status }}">
+                                            <span class="status-dot"></span>
+                                            {{ v_status }}
+                                        </span>
 
-                                <td>
-                                    <span class="status">
-                                        {{ document.get('verification_status', 'Unknown') }}
-                                        /
-                                        {{ document.get('storage_status', 'Unknown') }}
-                                    </span>
+                                        {% if s_status and s_status | lower != v_status | lower %}
+                                        <span class="status-badge status-{{ s_status | lower }}" title="Storage: {{ s_status }}">
+                                            <span class="status-dot"></span>
+                                            {{ s_status }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
                                 </td>
                             </tr>
 
